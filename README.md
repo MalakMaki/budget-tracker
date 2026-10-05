@@ -11,6 +11,7 @@ Your bank data never leaves your device.
 - Monthly charts
 - Subscription detection
 
+
 - Standardising to one Transaction shape keeps the parser separate from everything else.
 - Returning skipped rows instead of throwing makes failures visible to the user.
 - No backend, accounts or bank connections, which keeps the privacy claim simple and true.
