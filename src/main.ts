@@ -1,6 +1,7 @@
 import './style.css';
 import { parseHsbc } from './parser/hsbc';
 import { renderTable } from './ui/transactionTable';
+import { categorise } from './categoriser/categorise';
 
 const input = document.querySelector<HTMLInputElement>('#file-input')!;
 const dropzone = document.querySelector<HTMLElement>('#dropzone')!;
