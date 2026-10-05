@@ -2,12 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>budget-tracker</title>
+    <title>Budget Tracker</title>
   </head>
   <body>
-    <div id="app"></div>
+    <main id="app">
+      <h1>Budget Tracker</h1>
+      <p class="tagline">Your bank data never leaves this device.</p>
+
+      <label class="dropzone" id="dropzone">
+        <span>Choose your HSBC CSV, or drop it here</span>
+        <input type="file" id="file-input" accept=".csv,text/csv" />
+      </label>
+
+      <p id="message" role="status"></p>
+      <div id="results"></div>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
