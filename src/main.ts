@@ -2,11 +2,14 @@ import './style.css';
 import { parseHsbc } from './parser/hsbc';
 import { renderTable } from './ui/transactionTable';
 import { categorise } from './categoriser/categorise';
+import { spendingByCategory } from './categoriser/summary';
+import { renderCategoryChart } from './ui/categoryChart';
 
 const input = document.querySelector<HTMLInputElement>('#file-input')!;
 const dropzone = document.querySelector<HTMLElement>('#dropzone')!;
 const message = document.querySelector<HTMLElement>('#message')!;
 const results = document.querySelector<HTMLElement>('#results')!;
+const chartCanvas = document.querySelector<HTMLCanvasElement>('#category-chart')!;
 
 async function handleFile(file: File): Promise<void> {
   try {
@@ -23,9 +26,11 @@ async function handleFile(file: File): Promise<void> {
       message.textContent = `Read ${transactions.length} transactions.${skippedNote}`;
     }
     renderTable(results, transactions);
+    renderCategoryChart(chartCanvas, spendingByCategory(transactions));
   } catch {
     message.textContent = 'Something went wrong reading that file.';
     results.replaceChildren();
+    renderCategoryChart(chartCanvas, []);
   }
 }
 

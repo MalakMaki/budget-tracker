@@ -25,3 +25,4 @@ th, td { text-align: left; padding: 0.5rem; border-bottom: 1px solid rgba(128, 1
 td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
 .out { color: #c0392b; }
 .in { color: #1e8449; }
+.chart-wrap { position: relative; height: 320px; margin-top: 1.5rem; }
