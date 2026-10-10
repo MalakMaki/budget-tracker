@@ -7,12 +7,15 @@ import { spendingByCategory } from './categoriser/summary';
 import { loadOverrides, saveOverrides } from './storage/overrides';
 import { renderTable } from './ui/transactionTable';
 import { renderCategoryChart } from './ui/categoryChart';
+import { detectSubscriptions } from './subscriptions/detect';
+import { renderSubscriptions } from './ui/subscriptionList';
 
 const input = document.querySelector<HTMLInputElement>('#file-input')!;
 const dropzone = document.querySelector<HTMLElement>('#dropzone')!;
 const message = document.querySelector<HTMLElement>('#message')!;
 const results = document.querySelector<HTMLElement>('#results')!;
 const chartCanvas = document.querySelector<HTMLCanvasElement>('#category-chart')!;
+const subscriptionsEl = document.querySelector<HTMLElement>('#subscriptions')!;
 
 let transactions: Transaction[] = [];
 const overrides = loadOverrides();
@@ -29,6 +32,7 @@ function render(): void {
     }
   );
   renderCategoryChart(chartCanvas, spendingByCategory(transactions, overrides));
+    renderSubscriptions(subscriptionsEl, detectSubscriptions(transactions));
 }
 
 async function handleFile(file: File): Promise<void> {
