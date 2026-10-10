@@ -1,8 +1,11 @@
 import './style.css';
 import { parseHsbc } from './parser/hsbc';
-import { renderTable } from './ui/transactionTable';
+import type { Transaction } from './parser/types';
 import { categorise } from './categoriser/categorise';
+import { normalise } from './categoriser/normalise';
 import { spendingByCategory } from './categoriser/summary';
+import { loadOverrides, saveOverrides } from './storage/overrides';
+import { renderTable } from './ui/transactionTable';
 import { renderCategoryChart } from './ui/categoryChart';
 
 const input = document.querySelector<HTMLInputElement>('#file-input')!;
@@ -11,33 +14,50 @@ const message = document.querySelector<HTMLElement>('#message')!;
 const results = document.querySelector<HTMLElement>('#results')!;
 const chartCanvas = document.querySelector<HTMLCanvasElement>('#category-chart')!;
 
+let transactions: Transaction[] = [];
+const overrides = loadOverrides();
+
+function render(): void {
+  renderTable(
+    results,
+    transactions,
+    (t) => categorise(t, overrides),
+    (t, category) => {
+      overrides[normalise(t.description)] = category;
+      saveOverrides(overrides);
+      render();
+    }
+  );
+  renderCategoryChart(chartCanvas, spendingByCategory(transactions, overrides));
+}
+
 async function handleFile(file: File): Promise<void> {
   try {
     const text = await file.text();
-    const { transactions, skipped } = parseHsbc(text);
-    transactions.sort((a, b) => b.date.localeCompare(a.date));
+    const parsed = parseHsbc(text);
+    transactions = parsed.transactions.sort((a, b) => b.date.localeCompare(a.date));
 
     if (transactions.length === 0) {
       message.textContent =
         'No transactions found. Is this an HSBC CSV with date, description and amount columns?';
     } else {
       const skippedNote =
-        skipped.length > 0 ? ` ${skipped.length} row(s) could not be read and were skipped.` : '';
+        parsed.skipped.length > 0
+          ? ` ${parsed.skipped.length} row(s) could not be read and were skipped.`
+          : '';
       message.textContent = `Read ${transactions.length} transactions.${skippedNote}`;
     }
-    renderTable(results, transactions);
-    renderCategoryChart(chartCanvas, spendingByCategory(transactions));
   } catch {
+    transactions = [];
     message.textContent = 'Something went wrong reading that file.';
-    results.replaceChildren();
-    renderCategoryChart(chartCanvas, []);
   }
+  render();
 }
 
 input.addEventListener('change', () => {
   const file = input.files?.[0];
   if (file) void handleFile(file);
-  input.value = ''; // lets you pick the same file again
+  input.value = '';
 });
 
 dropzone.addEventListener('dragover', (e) => {

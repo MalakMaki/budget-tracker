@@ -26,3 +26,4 @@ td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-
 .out { color: #c0392b; }
 .in { color: #1e8449; }
 .chart-wrap { position: relative; height: 320px; margin-top: 1.5rem; }
+select { max-width: 11rem; }

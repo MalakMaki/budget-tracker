@@ -1,6 +1,9 @@
-export type Category =
-  | 'Groceries' | 'Eating out' | 'Transport' | 'Subscriptions'
-  | 'Shopping' | 'Health' | 'Income' | 'Other';
+export const CATEGORIES = [
+  'Groceries', 'Eating out', 'Transport', 'Subscriptions',
+  'Shopping', 'Health', 'University', 'Rent', 'Other',
+] as const;
+
+export type Category = (typeof CATEGORIES)[number];
 
 export const RULES: { category: Category; keywords: string[] }[] = [
   { category: 'Groceries', keywords: ['tesco', 'sainsbury', 'lidl', 'aldi', 'co-op', 'waitrose' , 'mother group'] },
@@ -9,4 +12,5 @@ export const RULES: { category: Category; keywords: string[] }[] = [
   { category: 'Subscriptions', keywords: ['spotify', 'netflix', 'prime video', 'ee', 'lycamobile','apple.com/bill'] },
   { category: 'Shopping', keywords: ['amazon', 'primark', 'whittard', 'marks&spencer','hollister','sostrene','m&s simple food', 'h&m','asos','sony','kiko milano', 'home bargains'] },
   { category: 'Health', keywords: ['boots', 'superdrug', 'pharmacy'] },
+  { category: 'Rent', keywords: ['stripe'] },
 ];
