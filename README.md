@@ -1,10 +1,6 @@
 # Budget Tracker
   ![Test and deploy](https://github.com/MalakMaki/budget-tracker/actions/workflows/deploy.yml/badge.svg)
 
-# Budget Tracker
-
-![Test and deploy](https://github.com/MalakMaki/budget-tracker/actions/workflows/deploy.yml/badge.svg)
-
 A student budget tracker that runs entirely in your browser. Your bank data never leaves your device.
 
 **[Try it live](https://malakmaki.github.io/budget-tracker/)** (use `sample-data/hsbc-three-months.csv` if you don't want to use your own statement)
