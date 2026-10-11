@@ -26,3 +26,11 @@ export function saveOverrides(overrides: Overrides): void {
     // storage unavailable (e.g. private mode): corrections just won't persist
   }
 }
+
+export function clearOverrides(): void {
+  try {
+    localStorage.removeItem(KEY);
+  } catch {
+    // nothing to clear if storage is unavailable
+  }
+}

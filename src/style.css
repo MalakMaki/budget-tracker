@@ -28,3 +28,13 @@ td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-
 .in { color: #1e8449; }
 .chart-wrap { position: relative; height: 320px; margin-top: 1.5rem; }
 select { max-width: 11rem; }
+.link-button {
+  background: none;
+  border: none;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 2rem;
+  opacity: 0.7;
+}

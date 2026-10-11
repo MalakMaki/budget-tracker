@@ -11,9 +11,9 @@
       <p class="tagline">Your bank data never leaves this device.</p>
 
       <label class="dropzone" id="dropzone">
-        <span>Choose your HSBC CSV, or drop it here</span>
-        <input type="file" id="file-input" accept=".csv,text/csv" />
-      </label>
+  <span>Choose your HSBC CSV files (select several months at once), or drop them here</span>
+  <input type="file" id="file-input" accept=".csv,text/csv" multiple />
+</label>
 
       <p id="message" role="status"></p>
       <div class="chart-wrap" hidden>
@@ -21,6 +21,7 @@
 </div>
 <section id="subscriptions" hidden></section>
       <div id="results"></div>
+      <button type="button" id="clear-corrections" class="link-button">Clear my saved corrections</button>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>

@@ -8,7 +8,7 @@ export function categorise(t: Transaction, overrides: Overrides = {}): Category 
   const corrected = overrides[text];
   if (corrected) return corrected;
 
-  if (t.amount > 0) return 'Income';
+  if (t.amount > 0) return 'Rent';
   for (const rule of RULES) {
     if (rule.keywords.some((k) => text.includes(k))) return rule.category;
   }

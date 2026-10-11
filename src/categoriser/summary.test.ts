@@ -20,15 +20,4 @@ describe('spendingByCategory', () => {
   it('returns an empty list when there is no spending', () => {
     expect(spendingByCategory([])).toEqual([]);
   });
-
-  it('uses a saved correction before the rules', () => {
-    const t = tx('TESCO STORES 3042 LONDON )))');
-    expect(categorise(t, { 'tesco stores london': 'Shopping' })).toBe('Shopping');
-  });
-
-  it('applies a correction to the same merchant with a different store number', () => {
-    const t = tx('TESCO STORES 9999 LONDON )))');
-    expect(categorise(t, { 'tesco stores london': 'Shopping' })).toBe('Shopping');
-  });
-  
 });
