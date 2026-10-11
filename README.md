@@ -1,4 +1,5 @@
 # Budget Tracker
+  ![Test and deploy](https://github.com/MalakMaki/budget-tracker/actions/workflows/deploy.yml/badge.svg)
 
 A student budget tracker that runs entirely in your browser.
 Your bank data never leaves your device.
